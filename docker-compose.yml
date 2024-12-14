@@ -9,8 +9,6 @@ services:
     volumes:
       - ./src:/app/src
       - ./test:/app/test
-      - ./transactions.csv:/mnt/data/transactions.csv  # Mount the CSV files into the container
-      - ./users.csv:/mnt/data/users.csv
     command: bash -c "python /app/src/solution_obtained/task1.py && pytest /app/test/test_task1.py"
     networks:
       - app-network
@@ -32,9 +30,7 @@ services:
       POSTGRES_DB: test
     ports:
       - "5432:5432"  # Expose PostgreSQL on port 5432
-    volumes:
-      - ./transactions.csv:/mnt/data/transactions.csv  # Mount CSV files into PostgreSQL container
-      - ./users.csv:/mnt/data/users.csv
+    
     networks:
       - app-network
 
