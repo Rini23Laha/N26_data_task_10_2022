@@ -23,5 +23,5 @@ WITH merged_data AS (
     ) AS temp
     GROUP BY agrmnt_id, client_id, product_id, interest_rate, grp
 )
--- Step 2: Insert the merged data into the new table
-SELECT * FROM merged_data;
+-- Insert the merged data into the new table
+SELECT *FROM merged_data ORDER BY agrmnt_id, actual_from_dt;

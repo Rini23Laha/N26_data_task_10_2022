@@ -4,12 +4,14 @@ services:
   feature-table-computation:
     build:
       context: .
-      dockerfile: Dockerfile-python  # Ensure this matches the actual filename
+      dockerfile: Dockerfile-python
     container_name: feature-table-container
     volumes:
       - ./src:/app/src
       - ./test:/app/test
-    command: bash -c "python /app/src/solution_obtained/task1.py && pytest /app/test/test_task1.py"
+      - ./transactions.csv:/app/transactions.csv  # Ensure CSV files are mapped
+      - ./users.csv:/app/users.csv
+    command: bash -c "sleep 10 && python /app/src/solution_obtained/task1.py && pytest /app/test/test_task1.py"
     networks:
       - app-network
     environment:
@@ -22,15 +24,14 @@ services:
   n26-case-study:
     build:
       context: .
-      dockerfile: Dockerfile-postgres  # Ensure this matches the actual filename
+      dockerfile: Dockerfile-postgres
     container_name: postgres-container
     environment:
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test
       POSTGRES_DB: test
     ports:
-      - "5432:5432"  # Expose PostgreSQL on port 5432
-    
+      - "5432:5432"
     networks:
       - app-network
 
