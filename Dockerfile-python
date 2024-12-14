@@ -1,0 +1,22 @@
+# Start with a Python base image
+FROM python:3.11-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy all the source code into the container
+COPY src /app/src
+
+# Copy the transaction and user data files into the container
+COPY transactions.csv /app/transactions.csv
+COPY users.csv /app/users.csv
+
+# Install dependencies (pytest for testing)
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Install PostgreSQL client for running SQL tasks
+RUN apt-get update && apt-get install -y postgresql-client
+
+# Command to run the Python script for Task 1 (Feature Table Computation)
+CMD ["python", "/app/src/solution_obtained/task1.py"]

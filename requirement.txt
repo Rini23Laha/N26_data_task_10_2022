@@ -1,3 +1,0 @@
-psycopg2
-flask  # or other Python libraries depending on your app
-pytest
