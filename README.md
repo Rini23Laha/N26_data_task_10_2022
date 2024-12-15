@@ -6,7 +6,7 @@ My name is Rini Laha, and I bring nearly 7 years of experience as a Data Enginee
 # Table of Contents:
 
 1. Project Structure
-2. 5. Project Setup
+2.  Project Setup
 3. Requirements
 4. Running the Solution
 5. How to Test SQL Queries in PostgreSQL
