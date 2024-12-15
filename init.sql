@@ -1,8 +1,9 @@
 -- Create users and transactions tables
 CREATE TABLE IF NOT EXISTS users (
     user_id UUID PRIMARY KEY,
-    is_active BOOLEAN
+    is_active BOOL DEFAULT NULL
 );
+
 
 CREATE TABLE IF NOT EXISTS transactions (
     transaction_id UUID PRIMARY KEY,
