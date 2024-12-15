@@ -20,9 +20,7 @@ My name is Rini Laha, and I bring nearly 7 years of experience as a Data Enginee
 ## Project Structure
 
 n26_data_task_10_2022/
-│
-├── init.sql                          # Initializes the PostgreSQL database and loads data
-│
+|
 ├── src/                               # Task-related resources
 │   ├── init-fixtures/                 # SQL scripts for creating tables and loading dummy data
 │   │   ├── task1.sql                  # SQL for Task 1 table creation and sample data
@@ -52,7 +50,6 @@ n26_data_task_10_2022/
 │
 ├── generate_data.py                   # Script to generate transaction and user data
 ├── requirements.txt                   # Python dependencies
-├── tasks.md                           # Markdown file describing each task
 └── README.md                          # Project overview
 
 
@@ -108,7 +105,7 @@ How do I run the solution manually?
 1. Running Python Scripts:
  - If you prefer to manually run the solution, navigate to src/solution_obtained/ and execute the Python script for Task 1:
   python task1.py
-- To run the tests for Task 1, use pytest
+- To run the tests for Task 1, use pytest please navigate to test folder/test_task1.py
   pytest test/test_task1.py
 
 2. Running SQL Queries:
@@ -206,14 +203,30 @@ Objective :
 Sql script to calculate the number of transactions a user had within the previous seven days for each transaction, we can write a SQL query using a self-join and a date range condition.
 
 Solution: 
+ The SQL query to achieve this can be written using a JOIN operation to compare each transaction with the other transactions from the same user and calculate how many of them fall within the previous 7 days.
+
+Assuming the transactions table has the following schema: please refer init-fixtures/task2.sql
+
+transaction_id: Unique identifier for the transaction
+user_id: The identifier of the user who made the transaction
+date: The date when the transaction occurred
+
 Here t1 and t2 were two tables t1 as current transaction and t2 as previous transaction
-1. Left join is used because We have to include transactions that may not have any previous transactions within the 7-day window. This ensures that transactions with no previous transactions within the last 7 days will still be included with a 0 count.
- - t1.user_id = t2.user_id  --> this equal insures only to consider transactions for same user 
- - and t2.date > t1.date --> this consider previous transaction only
- - and t2.date <= t1.date + INTERVAL '7 days'-- > filters out the transactions happened in 7 days
- - COUNT(t2.transaction_id): Counts the number of transactions that occurred for the user within the 7-day window (excluding the current transaction)
- - GROUP BY: We group the result by t1.transaction_id, t1.user_id, and t1.date to get one row per transaction.
- - ORDER BY: We order the results by user_id and date to keep the result organized.
+
+- FROM transactions t1: This is the main table, transactions, aliased as t1. We will use this as the reference for each transaction.
+
+- LEFT JOIN transactions t2: We join the same transactions table again, but this time, we alias it as t2. This will allow us to compare the current transaction (t1) to all others (t2) made by the same user (t1.user_id = t2.user_id).
+
+- ON t1.user_id = t2.user_id AND t2.date > t1.date AND t2.date <= t1.date + INTERVAL '7 days':
+
+   - We ensure that we are only looking at transactions made by the same user (t1.user_id = t2.user_id).
+   - We ensure that t2.date > t1.date to exclude the current transaction (since the problem statement specifies not to count the current transaction).
+   - We then check if t2.date falls within the next 7 days (t2.date <= t1.date + INTERVAL '7 days').
+   - COUNT(t2.transaction_id): This counts how many transactions the user made in the 7-day window.
+
+   - GROUP BY t1.transaction_id, t1.user_id, t1.date: We group by each transaction in t1, so the count is computed for each transaction separately.
+
+   - ORDER BY t1.date: Finally, we order the result by the transaction date for better readability and sequence.
 
 
 ---  What Happens Under the Hood in the Database Engine:---
@@ -272,9 +285,17 @@ The results are ordered by agrmnt_id and actual_from_dt to maintain the chronolo
 ## Known Issues and Troubleshooting
 
 What if I encounter errors during setup?
-Error: Missing Data for Column "user_id":
 
-This error could occur if the CSV data is incomplete or the format does not match the expected schema. Check the transactions.csv and users.csv files to ensure they contain the necessary columns.
-Error: Operator Does Not Exist:
+Incase of the setup issue please use virtual env
 
-This issue happens when the data type in the SQL query doesn't match the actual data type in the table (e.g., comparing boolean True with an integer 1). This is handled by casting or modifying the Python code to match data types.
+what if there is any other way of doing the sql queries ?
+
+There will be potential way of doing the queries but based on my understanding and knowledge i have written the code we can discuss if there will be any other best approaches.
+
+what if i dont have dbeaver ?
+
+Dbeaver is the open source tool that can be downloaded easily from google for setup related issues i would suggest to watch this video - https://www.youtube.com/watch?v=RdPYA-wDhTA&t=535s
+
+How i can verify if the ooutput is correct ?
+
+In the output_expected/{task.csv} i have added the output which i have received after running the code please do reverify them.

@@ -9,9 +9,6 @@ services:
     volumes:
       - ./src:/app/src
       - ./test:/app/test
-      - ./transactions.csv:/app/transactions.csv
-      - ./users.csv:/app/users.csv
-      - ./postgres_dataload.py:/app/postgres_dataload.py
     command: bash -c "sleep 10 && python /app/src/solution_obtained/task1.py && pytest /app/test/test_task1.py"
     networks:
       - app-network
