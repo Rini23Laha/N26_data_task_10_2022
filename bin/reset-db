@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-
-dropdb test
-createdb test
-cat $(ls /app/src/init-fixtures/*.sql) | psql
-
