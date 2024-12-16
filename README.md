@@ -6,7 +6,7 @@ My name is Rini Laha, and I bring nearly 7 years of experience as a Data Enginee
 # Table of Contents:
 
 1. Project Structure
-2. 5. Project Setup
+2. Project Setup
 3. Requirements
 4. Running the Solution
 5. How to Test SQL Queries in PostgreSQL
@@ -31,6 +31,7 @@ n26_data_task_10_2022/
 │   │   ├── task1_output.csv           # Expected output for Task 1
 │   │   ├── task2_output.csv           # Expected output for Task 2
 │   │   ├── task3_output.csv           # Expected output for Task 3
+|                                      
 │   ├── solution_obtained/             # Solution code for each task
 │   │   ├── task1.py                   # Python code for Task 1 (Transaction Analysis)
 │   │   ├── task2.sql                  # SQL solution for Task 2 (User Transaction Count)
@@ -65,9 +66,9 @@ How do I set up the project environment?
  - Once Docker is installed, navigate to the project folder in your terminal.
  - Run the following command to build the Docker images:
 bash
-   docker-compose build
+   docker-compose up --build  
 - Then, run the Docker Compose to bring up the PostgreSQL container:
-   docker-compose up
+   
 This will start up the PostgreSQL container, initializing the database and loading necessary data from the SQL files (e.g., task1.sql, task2.sql, task3.sql) located in the src/init-fixtures/ folder.
 
 3. Set up the Virtual Environment for Python:
@@ -194,7 +195,7 @@ Note :- There could be some potential errors as well which can be occured but no
 like data duplicate ,division by 0 or invalid sum , empty transaction or no users data which can be handled more gracefully in this code.
 
 I also tried to load the full data of transaction.csv and users.csv into the athena database using both psycopy and using docker init.sql but i was getting the error ERROR: missing data for column "user_id"
-  Where: COPY transactions, line 2: ""
+  Where: COPY transactions, line 2: "" i was doing this beacuse to validate the result between python and sql
   not  sure of the reason but please do let me know.
 
 ### Task 2 
@@ -299,3 +300,6 @@ Dbeaver is the open source tool that can be downloaded easily from google for se
 How i can verify if the ooutput is correct ?
 
 In the output_expected/{task.csv} i have added the output which i have received after running the code please do reverify them.
+
+
+Note: - "This is my first time using Docker, but I wanted to get familiar with containerization and its role in modern software development. I took the initiative to research online resources, set up Docker on my own, and worked through various tutorials to understand the concepts and functionality. During this process, I made sure to address any issues I encountered by troubleshooting them on my own and refining my understanding. While I’m still growing in this area, I’m excited to leverage Docker in real-world projects and continue learning through hands-on experience."
