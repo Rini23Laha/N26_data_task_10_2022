@@ -6,7 +6,11 @@ My name is Rini Laha, and I bring nearly 7 years of experience as a Data Enginee
 # Table of Contents:
 
 1. Project Structure
+<<<<<<< HEAD
 2. Project Setup
+=======
+2.  Project Setup
+>>>>>>> main
 3. Requirements
 4. Running the Solution
 5. How to Test SQL Queries in PostgreSQL
@@ -300,6 +304,9 @@ Dbeaver is the open source tool that can be downloaded easily from google for se
 How i can verify if the ooutput is correct ?
 
 In the output_expected/{task.csv} i have added the output which i have received after running the code please do reverify them.
+<<<<<<< HEAD
 
 
 Note: - "This is my first time using Docker, but I wanted to get familiar with containerization and its role in modern software development. I took the initiative to research online resources, set up Docker on my own, and worked through various tutorials to understand the concepts and functionality. During this process, I made sure to address any issues I encountered by troubleshooting them on my own and refining my understanding. While I’m still growing in this area, I’m excited to leverage Docker in real-world projects and continue learning through hands-on experience."
+=======
+>>>>>>> main
